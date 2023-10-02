@@ -41,6 +41,6 @@ namespace programmingproblems
                 Console.WriteLine($"Invalid entry, please use add or subtract for your final choice");
 
             }
-        }
+        } 
     }
 }

@@ -17,8 +17,7 @@ namespace programmingproblems
             double number = Convert.ToDouble(Console.ReadLine());
 
             Console.WriteLine("Please see your name badge below");
-
             Console.WriteLine($"\nName: {name}\nOccupation: {job}\nContact Number: {number}");
-        }
+
     }
 }

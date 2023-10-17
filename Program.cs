@@ -15,12 +15,12 @@ namespace PDP
 
             while (userExit)
             {
-                Console.WriteLine(); 
+                Console.WriteLine();
                 Console.WriteLine("Player score: " + playerScore + " \nCPU score: " + cpuScore);
 
                 Console.Write("Would you like to end(y/n)?\n");
                 string userEnd = Console.ReadLine();
-                
+
                 if (userEnd == "y")
                 {
                     Console.WriteLine("\nGoodbye!");
@@ -41,7 +41,7 @@ namespace PDP
 
                 int cpuChoice = random.Next(0, 3);
 
-                if (cpuChoice == 0) 
+                if (cpuChoice == 0)
                 {
                     Console.WriteLine("I choose rock.");
 
@@ -64,7 +64,7 @@ namespace PDP
                     }
                 }
 
-                else if (cpuChoice == 1) 
+                else if (cpuChoice == 1)
                 {
                     Console.WriteLine("I choose paper.");
 
@@ -87,7 +87,7 @@ namespace PDP
                     }
                 }
 
-                else if (cpuChoice == 2) 
+                else if (cpuChoice == 2)
                 {
                     Console.WriteLine("I choose scissors.");
 
@@ -110,6 +110,7 @@ namespace PDP
                     }
                 }
             }
+
         }
     }
 }

@@ -1,21 +1,41 @@
 ﻿using System;
 
-namespace programmingproblems
+namespace PDP
 {
-    class program
+    internal class Program
     {
         static void Main(string[] args)
         {
-            Random random = new Random();
+            Random random = new();
             int playerScore = 0;
             int cpuScore = 0;
+            bool userExit = true;
 
             Console.WriteLine("Welcome to rock paper scissors!");
 
-            while (playerScore != 3 && cpuScore != 3)
+            while (userExit)
             {
                 Console.WriteLine(); 
                 Console.WriteLine("Player score: " + playerScore + " \nCPU score: " + cpuScore);
+
+                Console.Write("Would you like to end(y/n)?\n");
+                string userEnd = Console.ReadLine();
+                
+                if (userEnd == "y")
+                {
+                    Console.WriteLine("\nGoodbye!");
+                    Environment.Exit(0);
+                }
+                else if (userEnd == "n")
+                {
+                    Console.WriteLine("\nOk, we proceed!");
+                }
+                else
+                {
+                    Console.WriteLine("\nInvalid Entry");
+                    continue;
+                }
+
                 Console.WriteLine("Please enter either 'rock', 'paper' or 'scissors'.\n");
                 string playerChoice = Console.ReadLine();
 
@@ -34,12 +54,16 @@ namespace programmingproblems
                             Console.WriteLine("You win.");
                             playerScore++;
                             break;
-                        default:
-                            Console.WriteLine("I win, you suck!");
+                        case "scissors":
+                            Console.WriteLine("I win!");
                             cpuScore++;
                             break;
+                        default:
+                            Console.WriteLine("Invalid Entry!");
+                            continue;
                     }
                 }
+
                 else if (cpuChoice == 1) 
                 {
                     Console.WriteLine("I choose paper.");
@@ -47,20 +71,23 @@ namespace programmingproblems
                     switch (playerChoice)
                     {
                         case "rock":
-                            Console.WriteLine("I win, you suck!");
+                            Console.WriteLine("I win!");
                             cpuScore++;
                             break;
                         case "paper":
                             Console.WriteLine("Draw.");
                             break;
-                        default:
-                            Console.WriteLine("You win.");
+                        case "scissors":
+                            Console.WriteLine("You win!");
                             playerScore++;
                             break;
+                        default:
+                            Console.WriteLine("Invalid Entry!");
+                            continue;
                     }
-
                 }
-                else 
+
+                else if (cpuChoice == 2) 
                 {
                     Console.WriteLine("I choose scissors.");
 
@@ -71,24 +98,18 @@ namespace programmingproblems
                             playerScore++;
                             break;
                         case "paper":
-                            Console.WriteLine("I win, you suck!");
+                            Console.WriteLine("I win!");
                             cpuScore++;
                             break;
-                        default:
-                            Console.WriteLine("Draw.");
+                        case "scissors":
+                            Console.WriteLine("Draw!");
                             break;
+                        default:
+                            Console.WriteLine("Invalid Entry.");
+                            continue;
                     }
                 }
-
-            }
-            if (playerScore == 3)
-            {
-                Console.WriteLine("\nCongratulations, you won.");
-            }
-            else
-            {
-                Console.WriteLine("\nYou lost!");
             }
         }
     }
-    }
+}

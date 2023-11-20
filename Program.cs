@@ -1,116 +1,128 @@
-﻿using System;
-
-namespace PDP
+﻿namespace PDP
 {
-    internal class Program
+    class Program
     {
-        static void Main(string[] args)
+        static List<string> products = new List<string>();
+        static void Main()
         {
-            Random random = new();
-            int playerScore = 0;
-            int cpuScore = 0;
-            bool userExit = true;
-
-            Console.WriteLine("Welcome to rock paper scissors!");
-
-            while (userExit)
+            while (true)
             {
-                Console.WriteLine();
-                Console.WriteLine("Player score: " + playerScore + " \nCPU score: " + cpuScore);
-
-                Console.Write("Would you like to end(y/n)?\n");
-                string userEnd = Console.ReadLine();
-
-                if (userEnd == "y")
+                DisplayScreen();
+                int userDecision;
+                if (!int.TryParse(Console.ReadLine(), out userDecision))
                 {
-                    Console.WriteLine("\nGoodbye!");
-                    Environment.Exit(0);
-                }
-                else if (userEnd == "n")
-                {
-                    Console.WriteLine("\nOk, we proceed!");
-                }
-                else
-                {
-                    Console.WriteLine("\nInvalid Entry");
+                    Console.WriteLine("\nInvalid input. Please enter a number.\n");
                     continue;
                 }
 
-                Console.WriteLine("Please enter either 'rock', 'paper' or 'scissors'.\n");
-                string playerChoice = Console.ReadLine();
-
-                int cpuChoice = random.Next(0, 3);
-
-                if (cpuChoice == 0)
+                switch (userDecision)
                 {
-                    Console.WriteLine("I choose rock.");
-
-                    switch (playerChoice)
-                    {
-                        case "rock":
-                            Console.WriteLine("Draw.");
-                            break;
-                        case "paper":
-                            Console.WriteLine("You win.");
-                            playerScore++;
-                            break;
-                        case "scissors":
-                            Console.WriteLine("I win!");
-                            cpuScore++;
-                            break;
-                        default:
-                            Console.WriteLine("Invalid Entry!");
-                            continue;
-                    }
-                }
-
-                else if (cpuChoice == 1)
-                {
-                    Console.WriteLine("I choose paper.");
-
-                    switch (playerChoice)
-                    {
-                        case "rock":
-                            Console.WriteLine("I win!");
-                            cpuScore++;
-                            break;
-                        case "paper":
-                            Console.WriteLine("Draw.");
-                            break;
-                        case "scissors":
-                            Console.WriteLine("You win!");
-                            playerScore++;
-                            break;
-                        default:
-                            Console.WriteLine("Invalid Entry!");
-                            continue;
-                    }
-                }
-
-                else if (cpuChoice == 2)
-                {
-                    Console.WriteLine("I choose scissors.");
-
-                    switch (playerChoice)
-                    {
-                        case "rock":
-                            Console.WriteLine("You win.");
-                            playerScore++;
-                            break;
-                        case "paper":
-                            Console.WriteLine("I win!");
-                            cpuScore++;
-                            break;
-                        case "scissors":
-                            Console.WriteLine("Draw!");
-                            break;
-                        default:
-                            Console.WriteLine("Invalid Entry.");
-                            continue;
-                    }
+                    case 1:
+                        AddProduct();
+                        break;
+                    case 2:
+                        DeleteProduct();
+                        break;
+                    case 3:
+                        ViewProducts();
+                        break;
+                    case 4:
+                        Console.WriteLine("\nBye!");
+                        return;
+                    default:
+                        Console.WriteLine("\nPlease pick a number between 1 and 4.\n");
+                        break;
                 }
             }
+        }
 
+        static void DisplayScreen()
+        {
+            Console.WriteLine("Inventory Management System");
+            Console.WriteLine("1. Add a product");
+            Console.WriteLine("2. Delete a product");
+            Console.WriteLine("3. View your products");
+            Console.WriteLine("4. Exit");
+            Console.Write("Your Entry: ");
+        }
+
+        static void AddProduct()
+        {
+            Console.Write("\nEnter the name of the product you wish to add: ");
+            string name = Console.ReadLine();
+
+            products.Add(name);
+
+            Console.WriteLine("\nAdding your item now...");
+            Thread.Sleep(2000);
+
+            Console.WriteLine($"\n'{name}' has been added to your inventory.\n");
+
+            if (products.Count == 1)
+            {
+                Console.WriteLine($"You now have {products.Count} item in your inventory.\n");
+                Thread.Sleep(1000);
+            }
+            else if (products.Count > 1)
+            {
+                Console.WriteLine($"You now have {products.Count} items in your inventory.\n");
+                Thread.Sleep(1000);
+            }
+        }
+
+        static void DeleteProduct()
+        {
+            if (products.Count == 0)
+            {
+                Console.WriteLine("\nYour inventory is empty.\n");
+                return;
+            }
+
+            Console.Write("\nEnter the name of the product you wish to delete: ");
+            string delete = Console.ReadLine();
+
+            Console.WriteLine("\nDeleting your item now...");
+            Thread.Sleep(2000);
+
+            if (products.Remove(delete))
+            {
+                Console.WriteLine($"\n'{delete}' has been removed from your inventory.\n");
+                if (products.Count == 1)
+                {
+                    Console.WriteLine($"You now have {products.Count} item in your inventory.\n");
+                }
+                else if (products.Count > 1)
+                {
+                    Console.WriteLine($"You now have {products.Count} items in your inventory.\n");
+                }
+                else
+                {
+                    Console.WriteLine("Inventory Empty.");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"\n'{delete}' is not found in your inventory.\n");
+            }
+        }
+
+        static void ViewProducts()
+        {
+            Console.WriteLine("\nLoading your products now...\n");
+            Thread.Sleep(2000);
+
+            foreach (var product in products)
+            {
+                if (products.Count > 0)
+                {
+                    Console.WriteLine($"{product}\n");
+                    Thread.Sleep(2000);
+                }
+                else
+                {
+                    Console.WriteLine("Empty Inventory.");
+                }
+            }
         }
     }
 }
